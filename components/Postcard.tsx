@@ -124,15 +124,15 @@ export function Postcard({
                   value={message}
                   onChange={(e) => onMessageChange?.(e.target.value)}
                   placeholder="Wish you were here..."
-                  className="ruled-lines w-full h-full resize-none overflow-y-auto bg-transparent p-5 sm:p-7 font-hand text-2xl sm:text-3xl leading-[35px] text-ink placeholder:text-ink-faint focus:outline-none"
+                  className="message-pane ruled-lines message-text w-full h-full resize-none overflow-y-auto bg-transparent font-hand text-ink placeholder:text-ink-faint focus:outline-none"
                   style={{ backgroundAttachment: "local" }}
                 />
               ) : (
                 <div
-                  className="ruled-lines w-full h-full overflow-y-auto p-5 sm:p-7"
+                  className="message-pane ruled-lines w-full h-full overflow-y-auto"
                   style={{ backgroundAttachment: "local" }}
                 >
-                  <p className="font-hand text-2xl sm:text-3xl leading-[35px] text-ink whitespace-pre-wrap">
+                  <p className="message-text font-hand text-ink whitespace-pre-wrap">
                     {message}
                   </p>
                 </div>

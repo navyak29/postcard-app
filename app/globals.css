@@ -84,16 +84,28 @@ body {
   background: var(--color-paper);
   transform: rotateY(180deg);
   display: flex;
+  container-type: inline-size;
+}
+
+.message-pane {
+  --pitch: clamp(18px, 7.6cqw, 37px);
+  padding: calc(var(--pitch) * 0.78);
+}
+
+.message-text {
+  font-size: calc(var(--pitch) * 0.82);
+  line-height: var(--pitch);
 }
 
 .ruled-lines {
   background-image: repeating-linear-gradient(
     to bottom,
     transparent 0,
-    transparent 35px,
-    var(--color-rule) 35px,
-    var(--color-rule) 36px
+    transparent calc(var(--pitch, 36px) - 1px),
+    var(--color-rule) calc(var(--pitch, 36px) - 1px),
+    var(--color-rule) var(--pitch, 36px)
   );
+  background-position-y: calc(var(--pitch, 36px) * 0.22);
 }
 
 .postmark-ink {
