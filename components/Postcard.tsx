@@ -48,7 +48,7 @@ export function Postcard({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleFrontClick() {
-    if (editableImage && !imageUrl) {
+    if (editableImage) {
       fileInputRef.current?.click();
     } else if (!editableMessage) {
       onToggleFlip();
@@ -67,8 +67,15 @@ export function Postcard({
             tabIndex={editableImage || !editableMessage ? 0 : undefined}
           >
             {imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={imageUrl} alt="" className="w-full h-full object-cover" />
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={imageUrl} alt="" className="w-full h-full object-cover" />
+                {editableImage && (
+                  <span className="absolute bottom-2 right-3 font-sans text-xs tracking-wide text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
+                    {uploading ? "Uploading..." : "Tap to change photo"}
+                  </span>
+                )}
+              </>
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center gap-2 text-ink-faint">
                 {editableImage ? (
