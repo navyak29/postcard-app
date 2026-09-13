@@ -118,19 +118,24 @@ export function Postcard({
 
           {/* Back: message + address side */}
           <div className="postcard-face postcard-back">
-            <div className="flex-[1.4] relative p-5 sm:p-7 border-r border-dashed border-rule">
-              <div className="absolute inset-5 sm:inset-7 ruled-lines pointer-events-none" />
+            <div className="flex-[1.4] relative border-r border-dashed border-rule">
               {editableMessage ? (
                 <textarea
                   value={message}
                   onChange={(e) => onMessageChange?.(e.target.value)}
                   placeholder="Wish you were here..."
-                  className="relative w-full h-full resize-none bg-transparent font-hand text-2xl sm:text-3xl leading-[35px] text-ink placeholder:text-ink-faint focus:outline-none"
+                  className="ruled-lines w-full h-full resize-none overflow-y-auto bg-transparent p-5 sm:p-7 font-hand text-2xl sm:text-3xl leading-[35px] text-ink placeholder:text-ink-faint focus:outline-none"
+                  style={{ backgroundAttachment: "local" }}
                 />
               ) : (
-                <p className="relative font-hand text-2xl sm:text-3xl leading-[35px] text-ink whitespace-pre-wrap">
-                  {message}
-                </p>
+                <div
+                  className="ruled-lines w-full h-full overflow-y-auto p-5 sm:p-7"
+                  style={{ backgroundAttachment: "local" }}
+                >
+                  <p className="font-hand text-2xl sm:text-3xl leading-[35px] text-ink whitespace-pre-wrap">
+                    {message}
+                  </p>
+                </div>
               )}
             </div>
 
