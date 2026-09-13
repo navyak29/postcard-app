@@ -69,10 +69,13 @@ export function Postcard({
             {imageUrl ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={imageUrl} alt="" className="w-full h-full object-cover" />
+                <img src={imageUrl} alt="" className="w-full h-full object-contain" />
                 {editableImage && (
-                  <span className="absolute bottom-2 right-3 font-sans text-xs tracking-wide text-white/90 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)]">
-                    {uploading ? "Uploading..." : "Tap to change photo"}
+                  <span className="absolute bottom-2.5 right-2.5 flex items-center gap-1 font-sans text-xs font-medium bg-white/90 text-ink px-2.5 py-1 rounded-full shadow-sm">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                    </svg>
+                    {uploading ? "Uploading..." : "Change photo"}
                   </span>
                 )}
               </>
