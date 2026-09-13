@@ -8,6 +8,8 @@ export const sql = neon(process.env.DATABASE_URL);
 
 export type Postcard = {
   id: string;
+  sender_name: string;
+  recipient_name: string;
   sender_email: string;
   recipient_email: string;
   message: string;

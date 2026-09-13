@@ -5,16 +5,24 @@ import { sendPostcardEmail } from "@/lib/email";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
-  const { message, imageUrl, senderEmail, recipientEmail } = body as {
+  const { message, imageUrl, senderName, recipientName, senderEmail, recipientEmail } = body as {
     message?: string;
     imageUrl?: string | null;
+    senderName?: string;
+    recipientName?: string;
     senderEmail?: string;
     recipientEmail?: string;
   };
 
-  if (!message?.trim() || !senderEmail?.trim() || !recipientEmail?.trim()) {
+  if (
+    !message?.trim() ||
+    !senderName?.trim() ||
+    !recipientName?.trim() ||
+    !senderEmail?.trim() ||
+    !recipientEmail?.trim()
+  ) {
     return NextResponse.json(
-      { error: "message, senderEmail, and recipientEmail are required" },
+      { error: "message, sender/recipient names, and sender/recipient emails are required" },
       { status: 400 }
     );
   }
@@ -23,8 +31,8 @@ export async function POST(req: NextRequest) {
 
   try {
     await sql`
-      insert into postcards (id, sender_email, recipient_email, message, image_url)
-      values (${id}, ${senderEmail.trim().toLowerCase()}, ${recipientEmail.trim().toLowerCase()}, ${message.trim()}, ${imageUrl ?? null})
+      insert into postcards (id, sender_name, recipient_name, sender_email, recipient_email, message, image_url)
+      values (${id}, ${senderName.trim()}, ${recipientName.trim()}, ${senderEmail.trim().toLowerCase()}, ${recipientEmail.trim().toLowerCase()}, ${message.trim()}, ${imageUrl ?? null})
     `;
   } catch (err) {
     console.error("Failed to save postcard:", err);
@@ -40,7 +48,7 @@ export async function POST(req: NextRequest) {
   try {
     await sendPostcardEmail({
       to: recipientEmail.trim().toLowerCase(),
-      fromEmail: senderEmail.trim().toLowerCase(),
+      fromName: senderName.trim(),
       viewUrl,
       message: message.trim(),
     });

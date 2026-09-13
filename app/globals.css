@@ -2,18 +2,159 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #2b2a28;
+
+  --color-paper: #fbf7ec;
+  --color-paper-empty: #efe9da;
+  --color-ink: #2b2a28;
+  --color-ink-faint: #8a8272;
+  --color-stamp: #c0463a;
+  --color-airmail: #2c4b7c;
+  --color-rule: #dcd3bb;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-paper: var(--color-paper);
+  --color-paper-empty: var(--color-paper-empty);
+  --color-ink: var(--color-ink);
+  --color-ink-faint: var(--color-ink-faint);
+  --color-stamp: var(--color-stamp);
+  --color-airmail: var(--color-airmail);
+  --color-rule: var(--color-rule);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-hand: var(--font-caveat);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* --- Postcard --- */
+
+.airmail-frame {
+  padding: 5px;
+  border-radius: 16px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-stamp) 0 8px,
+    #fff 8px 11px,
+    var(--color-airmail) 11px 19px,
+    #fff 19px 22px
+  );
+  box-shadow: 0 24px 48px -20px rgba(43, 42, 40, 0.4);
+}
+
+.postcard-scene {
+  perspective: 2200px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.postcard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.1, 0.2, 1);
+}
+
+.postcard.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.postcard-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.postcard-front {
+  background: var(--color-paper-empty);
+}
+
+.postcard-back {
+  background: var(--color-paper);
+  transform: rotateY(180deg);
+  display: flex;
+}
+
+.ruled-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 35px,
+    var(--color-rule) 35px,
+    var(--color-rule) 36px
+  );
+}
+
+.postmark-ink {
+  mix-blend-mode: multiply;
+  color: var(--color-airmail);
+  opacity: 0.82;
+}
+
+.stamp-box {
+  border: 1.5px solid var(--color-stamp);
+  outline: 1.5px dashed var(--color-stamp);
+  outline-offset: 3px;
+}
+
+@keyframes stamp-down {
+  0% {
+    transform: translateY(-70px) scale(2.2) rotate(8deg);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(4px) scale(0.94) rotate(-10deg);
+    opacity: 0.9;
+  }
+  80% {
+    transform: translateY(-2px) scale(1.03) rotate(-7deg);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(-8deg);
+    opacity: 0.82;
+  }
+}
+
+.postmark-stamping {
+  animation: stamp-down 0.8s cubic-bezier(0.3, 0.6, 0.3, 1) forwards;
+}
+
+@keyframes card-thump {
+  0%, 55% {
+    transform: scale(1);
+  }
+  65% {
+    transform: scale(0.985);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card-thumping {
+  animation: card-thump 0.8s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .postcard {
+    transition: none;
+  }
+  .postmark-stamping {
+    animation: none;
+    opacity: 0.82;
+  }
+  .card-thumping {
+    animation: none;
+  }
 }
