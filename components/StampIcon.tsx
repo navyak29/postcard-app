@@ -1,6 +1,6 @@
 export function SunflowerStamp() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24">
+    <svg viewBox="0 0 24 24" className="w-full h-full">
       <g>
         {Array.from({ length: 8 }).map((_, i) => (
           <ellipse

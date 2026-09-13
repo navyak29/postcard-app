@@ -134,20 +134,22 @@ export function Postcard({
               )}
             </div>
 
-            <div className="flex-1 flex flex-col justify-between p-4 sm:p-5">
-              <div className="relative h-20 sm:h-24 flex justify-end">
-                <div className="stamp-box w-14 h-16 sm:w-16 sm:h-20 bg-paper flex flex-col items-center justify-center gap-1 rotate-[-4deg]">
-                  <SunflowerStamp />
-                  <span className="font-mono text-[7px] tracking-widest text-ink-faint">POSTAGE</span>
+            <div className="flex-1 flex flex-col justify-between p-2.5 sm:p-5 min-w-0">
+              <div className="relative h-14 sm:h-24 flex justify-end">
+                <div className="stamp-box w-10 h-12 sm:w-16 sm:h-20 bg-paper flex flex-col items-center justify-center gap-0.5 sm:gap-1 rotate-[-4deg]">
+                  <div className="w-4 h-4 sm:w-6 sm:h-6">
+                    <SunflowerStamp />
+                  </div>
+                  <span className="hidden sm:inline font-mono text-[7px] tracking-widest text-ink-faint">POSTAGE</span>
                 </div>
                 {showPostmark && (
-                  <div className="absolute right-6 sm:right-8 top-6 sm:top-8 w-16 h-12 sm:w-20 sm:h-14">
+                  <div className="absolute right-4 sm:right-8 top-4 sm:top-8 w-12 h-9 sm:w-20 sm:h-14">
                     <Postmark date={date} animate={stamping} />
                   </div>
                 )}
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-1 sm:space-y-3">
                 <AddressLine
                   label="From"
                   value={senderName}
@@ -185,8 +187,8 @@ function AddressLine({
   placeholder: string;
 }) {
   return (
-    <div className="border-b border-rule pb-1">
-      <span className="font-mono text-[9px] tracking-widest text-ink-faint uppercase">
+    <div className="border-b border-rule pb-0.5 sm:pb-1 min-w-0">
+      <span className="font-mono text-[8px] sm:text-[9px] tracking-widest text-ink-faint uppercase">
         {label}
       </span>
       {editable ? (
@@ -196,10 +198,10 @@ function AddressLine({
           value={value}
           onChange={(e) => onChange?.(e.target.value)}
           placeholder={placeholder}
-          className="block w-full bg-transparent font-hand text-lg sm:text-xl text-ink placeholder:text-ink-faint placeholder:font-sans placeholder:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-airmail rounded-sm"
+          className="block w-full min-w-0 bg-transparent font-hand text-base sm:text-xl text-ink placeholder:text-ink-faint placeholder:font-sans placeholder:text-xs sm:placeholder:text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-airmail rounded-sm"
         />
       ) : (
-        <span className="block font-hand text-lg sm:text-xl text-ink truncate">{value}</span>
+        <span className="block font-hand text-base sm:text-xl text-ink truncate">{value}</span>
       )}
     </div>
   );

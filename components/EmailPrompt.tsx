@@ -19,13 +19,13 @@ export function EmailPrompt({
   const [recipientEmail, setRecipientEmail] = useState(defaultRecipientEmail);
 
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center bg-ink/40 px-6">
+    <div className="fixed inset-0 z-10 flex items-center justify-center bg-ink/40 px-4">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           onConfirm(senderEmail.trim(), recipientEmail.trim());
         }}
-        className="w-full max-w-sm rounded-2xl bg-paper shadow-2xl p-6 sm:p-7"
+        className="w-full max-w-sm rounded-2xl bg-paper shadow-2xl p-5 sm:p-7"
       >
         <h2 className="font-hand text-2xl text-ink mb-1">One more thing</h2>
         <p className="text-sm text-ink-faint mb-5">
@@ -61,17 +61,17 @@ export function EmailPrompt({
           />
         </label>
 
-        <div className="flex gap-3 justify-end">
+        <div className="flex gap-2 sm:gap-3 justify-end">
           <button
             type="button"
             onClick={onCancel}
-            className="font-sans text-sm px-4 py-2 rounded-full text-ink-faint hover:text-ink transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-airmail"
+            className="whitespace-nowrap font-sans text-sm px-3 sm:px-4 py-2 rounded-full text-ink-faint hover:text-ink transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-airmail"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="font-sans text-sm font-medium px-6 py-2 rounded-full bg-stamp text-white hover:brightness-105 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-airmail"
+            className="whitespace-nowrap font-sans text-sm font-medium px-4 sm:px-6 py-2 rounded-full bg-stamp text-white hover:brightness-105 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-airmail"
           >
             Send postcard
           </button>
